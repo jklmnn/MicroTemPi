@@ -14,15 +14,22 @@ package body Temperature is
    is
       S_Temp : Serial := Serialize (NRF51.Temperature.Read);
    begin
-      --  MicroBit.Display.Display (Integer'Image (Temp));
+      MicroBit.Display.Set (0, 1);
       for Bit of S_Temp loop
-      --   MicroBit.Display.Display(Boolean'Image (Bit));
+         if Bit then
+            MicroBit.Display.Set (0, 1);
+         else
+            MicroBit.Display.Clear (0, 1);
+         end if;
          MicroBit.IOs.Set (8, Bit);
          MicroBit.IOs.Set (16, True);
+         MicroBit.Display.Set (0, 0);
          MicroBit.Time.Delay_Ms (10);
          MicroBit.IOs.Set (16, False);
+         MicroBit.Display.Clear (0, 0);
          MicroBit.Time.Delay_Ms (10);
       end loop;
+      MicroBit.Display.Clear(0, 1);
    end Send;
 
    function Serialize (Value : NRF51.Temperature.Temp_Celcius) return Serial
