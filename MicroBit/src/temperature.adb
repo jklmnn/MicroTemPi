@@ -1,6 +1,5 @@
 pragma Ada_2012;
 
-with NRF51.Temperature;
 with MicroBit.Display;
 with MicroBit.IOs;
 with MicroBit.Time;
@@ -13,11 +12,11 @@ package body Temperature is
 
    procedure Send
    is
-      Temp : Integer := Integer (NRF51.Temperature.Read);
-      S_Temp : Serial := Serialize (Temp);
+      S_Temp : Serial := Serialize (NRF51.Temperature.Read);
    begin
       --  MicroBit.Display.Display (Integer'Image (Temp));
       for Bit of S_Temp loop
+      --   MicroBit.Display.Display(Boolean'Image (Bit));
          MicroBit.IOs.Set (8, Bit);
          MicroBit.IOs.Set (16, True);
          MicroBit.Time.Delay_Ms (10);
@@ -26,10 +25,12 @@ package body Temperature is
       end loop;
    end Send;
 
-   function Serialize (Value : Integer) return Serial
+   function Serialize (Value : NRF51.Temperature.Temp_Celcius) return Serial
    is
       S : Serial := (others => False);
-      V : Integer := Value;
+      T : Integer
+        with Address => Value'Address;
+      V : Integer := T;
    begin
       for I in Serial'Range loop
          S (I) := V mod 2 = 1;
