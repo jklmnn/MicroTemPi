@@ -1,3 +1,6 @@
 [submodule "MicroBit/Ada_Drivers_Library"]
 	path = MicroBit/Ada_Drivers_Library
 	url = https://github.com/AdaCore/Ada_Drivers_Library.git
+[submodule "RaspberryPi/wiringPi-Ada"]
+	path = RaspberryPi/wiringPi-Ada
+	url = https://github.com/jklmnn/wiringPi-Ada.git
