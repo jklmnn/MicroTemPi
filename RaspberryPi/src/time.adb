@@ -7,7 +7,7 @@ use all type Ada.Calendar.Time;
 
 procedure Time
 is
-   T : Ada.Calendar.Time := Timestamp.Time;
+   T : Ada.Calendar.Time := Timestamp.Trim_Precision (Timestamp.Time);
    Check : Boolean :=
      Timestamp.Parse (Timestamp.Image (T)) = T;
 begin
