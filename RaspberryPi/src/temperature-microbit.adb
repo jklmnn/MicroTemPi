@@ -2,7 +2,7 @@ pragma Ada_2012;
 with Wiring.Pi;
 with System;
 
-package body Temperature is
+package body Temperature.MicroBit is
 
    Status : Integer;
    Received_Count : Integer;
@@ -59,4 +59,4 @@ begin
    Received_Data := 0;
    Received_Count := 0;
 
-end Temperature;
+end Temperature.MicroBit;
